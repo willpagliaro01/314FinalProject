@@ -11,7 +11,9 @@ setup(
         "dagster",
         "pandas",
         "os",
-        "zipfile"
+        "zipfile",
+        "csv",
+        "unittest"
     ],
     extras_require={"dev": ["dagster-webserver", "pytest"]},
 )
