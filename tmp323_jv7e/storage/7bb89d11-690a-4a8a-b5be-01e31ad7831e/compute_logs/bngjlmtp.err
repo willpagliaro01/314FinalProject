@@ -1,0 +1,40 @@
+[32m2024-04-05 14:55:02 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 7bb89d11-690a-4a8a-b5be-01e31ad7831e - 59905 - LOGS_CAPTURED - Started capturing logs in process (pid: 59905).
+[32m2024-04-05 14:55:02 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 7bb89d11-690a-4a8a-b5be-01e31ad7831e - 59905 - download_kaggle_data_3 - STEP_START - Started execution of step "download_kaggle_data_3".
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/bin/kaggle", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/kaggle/cli.py", line 70, in main
+    out = args.func(**command_args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/kaggle/api/kaggle_api_extended.py", line 1000, in competition_download_cli
+    self.competition_download_file(competition, file_name, path,
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/kaggle/api/kaggle_api_extended.py", line 931, in competition_download_file
+    url = response.retries.history[0].redirect_location.split('?')[0]
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: tuple index out of range
+[32m2024-04-05 14:55:02 -0500[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 7bb89d11-690a-4a8a-b5be-01e31ad7831e - 59905 - download_kaggle_data_3 - STEP_FAILURE - Execution of step "download_kaggle_data_3" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "download_kaggle_data_3"::
+
+FileNotFoundError: [Errno 2] No such file or directory: './data/nfl-big-data-bowl-2024.zip'
+
+Stack Trace:
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/dagster/_core/execution/plan/utils.py", line 54, in op_execution_error_boundary
+    yield
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/dagster/_utils/__init__.py", line 464, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/dagster/_core/execution/plan/compute_generator.py", line 141, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/dagster/_core/execution/plan/compute_generator.py", line 129, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranavkirti/Desktop/College/Spring 2024/CSE 314/314_final/314_final/assets.py", line 31, in download_kaggle_data_3
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/zipfile/__init__.py", line 1323, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+[0m
