@@ -1,6 +1,32 @@
+[project]
+name = "314-final"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "pkirti33", email = "kirti.p@wustl.edu" }
+]
+dependencies = [
+    "dagster>=1.7.1",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[project.scripts]
+hello = "314_final:hello"
+
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/314_final"]
 
 [tool.dagster]
 module_name = "314_final"
