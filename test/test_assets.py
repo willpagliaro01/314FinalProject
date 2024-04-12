@@ -2,7 +2,7 @@ import pytest
 import os
 import pandas as pd
 from pathlib import Path
-import 314_final
+import final_314
 from unittest.mock import patch
 
 
@@ -43,7 +43,7 @@ def test_players_cleaned_df():
 def total_tackles_test():
     df = pd.read_csv("./data/tackles.csv")
     input = df[df['gameId'] == 2022090800]
-    cleaned = 314_final.add_total_tackles_column()
+    cleaned = final_314.add_total_tackles_column()
     cleaned = cleaned[cleaned['gameId'] == 2022090800]
     assert input == cleaned
 

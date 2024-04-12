@@ -6,10 +6,11 @@ import zipfile
 import csv
 from dagster import MetadataValue, asset, MaterializeResult, AssetExecutionContext
 
-import os
-import zipfile
 from kaggle import api
 from kaggle.api.kaggle_api_extended import KaggleApi
+
+import boxsdk
+from boxsdk import OAuth2, Client 
 
 
 @asset
@@ -31,6 +32,23 @@ def download_kaggle_data(context: AssetExecutionContext) -> MaterializeResult:
         zip_ref.extractall("./data")
 
     return MaterializeResult
+
+@asset
+def download_box_data(context: AssetExecutionContext) -> MaterializeResult:
+   os.makedirs("./data", exist_ok=True)
+
+   auth = OAuth2(client_id='YOUR_CLIENT_ID',
+                 client_secret='YOUR_CLIENT_SECRET',
+                 access_token='YOUR_ACCESS_TOKEN')
+   client = Client(auth)
+
+   folder = client.folder('nfl-big-data-bowl-2024').get()
+
+   for csv in folder.get_items():
+    if isinstance(csv, boxsdk.object.file.File) and csv.name.endswith('.csv'):
+        # Download the file to the ./data folder
+        csv.download_to_file(f'./data/{csv.name}')
+        print(f"Downloaded {csv.name} successfully.")
 
 @asset
 def add_total_tackles_column(download_kaggle_data) -> MaterializeResult:

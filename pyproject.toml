@@ -1,5 +1,5 @@
 [project]
-name = "314-final"
+name = "final_314"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
@@ -7,12 +7,16 @@ authors = [
 ]
 dependencies = [
     "dagster>=1.7.1",
+    "dagster-cloud>=1.7.1",
+    "pytest>=8.1.1",
+    "kaggle>=1.6.11",
+    "pandas>=2.0.3",
+    "boxsdk>=3.9.2",
+    "dagster-webserver>=1.7.1",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
 
-[project.scripts]
-hello = "314_final:hello"
 
 [build-system]
 requires = ["hatchling"]
@@ -26,7 +30,7 @@ dev-dependencies = []
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/314_final"]
+packages = ["src/final_314"]
 
 [tool.dagster]
-module_name = "314_final"
+module_name = "final_314"
