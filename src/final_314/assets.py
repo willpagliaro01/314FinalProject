@@ -84,9 +84,10 @@ def calculate_home_advantage(download_kaggle_data) -> MaterializeResult:
 
 
 # Function to convert height from feet-inches format to inches
-def height_to_inches(height):
-   feet, inches = map(int, height.split("-"))
-   return feet * 12 + inches
+@asset
+def height_to_inches(download_kaggle_data) -> MaterializeResult:
+   #feet, inches = map(int, height.split("-"))
+   return 2 #feet * 12 + inches
 
 @asset
 def weight_density(download_kaggle_data) -> MaterializeResult:
